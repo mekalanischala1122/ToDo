@@ -23,7 +23,7 @@ var Todo = mongoose.model('Todo',todoSchema)
 
 module.exports = function(app){
 
-   app.get('/todo',(req,res)=>{
+   app.get('/',(req,res)=>{
         /*geting data from out database and passing it to view */
         Todo.find({},(err,data)=>{
             if(err) throw err;
@@ -31,7 +31,7 @@ module.exports = function(app){
         })
    }) 
 
-   app.post('/todo',urlencodedParser,(req,res)=>{
+   app.post('/',urlencodedParser,(req,res)=>{
         /*adding the new data from view to our database */
         var newTodo = Todo(req.body).save((err,data)=>{
             if(err) throw err
@@ -39,7 +39,7 @@ module.exports = function(app){
         })
     })
     
-   app.delete('/todo/:item',(req,res)=>{
+   app.delete('/:item',(req,res)=>{
     /*deleting the requested item fom our database*/
       Todo.find({item: req.params.item.replace(/\-/g," ")}).remove((err,data)=>{
         if(err) throw err
